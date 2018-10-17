@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8" collation="utf8_general_ci">transaksi</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="laptop" view="colnames">
+<left>179</left>
+<top>243</top>
+<width>120</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `laptop` (
+  `Kode_Laptop` varchar(50) NOT NULL,
+  `Merek` varchar(50) default NULL,
+  PRIMARY KEY  (`Kode_Laptop`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="pembeli" view="colnames">
+<left>624</left>
+<top>149</top>
+<width>131</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `pembeli` (
+  `ID_Pembeli` char(8) NOT NULL,
+  `Nama_Pembeli` varchar(50) default NULL,
+  PRIMARY KEY  (`ID_Pembeli`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="penjual" view="colnames">
+<left>181</left>
+<top>60</top>
+<width>128</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `penjual` (
+  `ID_Penjual` char(8) NOT NULL,
+  `Nama_Penjual` varchar(50) default NULL,
+  PRIMARY KEY  (`ID_Penjual`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="transaksi" view="colnames">
+<left>392</left>
+<top>114</top>
+<width>153</width>
+<height>197</height>
+<sql_create_table>CREATE TABLE `transaksi` (
+  `Kode_Transaksi` char(8) NOT NULL,
+  `ID_Penjual` char(8) default NULL,
+  `ID_Pembeli` char(8) default NULL,
+  `Kode_Laptop` char(8) default NULL,
+  `Harga` int(11) default NULL,
+  `Tanggal_Transaksi` date default NULL,
+  `Stok` int(11) default NULL,
+  PRIMARY KEY  (`Kode_Transaksi`),
+  KEY `ID_Penjual` (`ID_Penjual`),
+  KEY `ID_Pembeli` (`ID_Pembeli`),
+  KEY `Kode_Laptop` (`Kode_Laptop`),
+  CONSTRAINT `transaksi_ibfk_3` FOREIGN KEY (`Kode_Laptop`) REFERENCES `laptop` (`Kode_Laptop`),
+  CONSTRAINT `transaksi_ibfk_1` FOREIGN KEY (`ID_Penjual`) REFERENCES `penjual` (`ID_Penjual`),
+  CONSTRAINT `transaksi_ibfk_2` FOREIGN KEY (`ID_Pembeli`) REFERENCES `pembeli` (`ID_Pembeli`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
